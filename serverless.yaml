@@ -1,0 +1,29 @@
+service: nestjs-api
+
+useDotenv: true
+
+plugins:
+  - serverless-offline
+
+provider:
+  name: aws
+  runtime: nodejs18.x
+  environment:
+    DATABASE_URL: ${env:DATABASE_URL}
+    region: ap-south-1
+
+package:
+  patterns:
+    - '!node_modules/prisma/**'
+    - '!node_modules/@prisma/engines/**'
+
+functions:
+  main:
+    handler: dist/serverless.handler
+    events:
+      - http:
+          method: ANY
+          path: /
+      - http:
+          method: ANY
+          path: '{proxy+}'
