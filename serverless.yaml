@@ -1,4 +1,4 @@
-service: nestjs-api
+service: IG-Clone-REST-API
 
 useDotenv: true
 
